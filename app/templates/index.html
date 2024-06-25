@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Attendance Poll</title>
+  </head>
+  <body>
+
+    <script>
+      console.log("Hello world!")
+    </script>
+
+    <form action="/attending" method="POST">
+      If you'll be there, type your name and click the button!
+      <input type="text" name="name" value="Mickey" />
+      <button type="submit">I'm in!</button>
+    </form>
+
+    <p>Currently attending: {{ count }}</p>
+
+    <ul id="invitees">
+      {% for invitee in invitees %}
+      <li>Name: {{ invitee.name }}, Attending? {{ invitee.attending }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

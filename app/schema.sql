@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS invitee;
+
+CREATE TABLE invitee (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL,
+  attending BOOLEAN NOT NULL CHECK (attending IN (0, 1))
+)
