@@ -17,6 +17,8 @@ def map_attend_value(value):
         return "is attending"
     elif value == 0:
         return "is not attending"
+    elif value == 2:
+        return "is not sure yet"
     else:
         raise ValueError(f'Could not parse attendance value: {value}')
 
@@ -54,10 +56,10 @@ def get_invitee_rsvp(name):
 def update_rsvp(name):
     db = get_db()
     attending = get_invitee_rsvp(name)
-    if attending:
-        new_attending = False
-    else:
+    if attending is None:
         new_attending = True
+    else:
+        new_attending = (attending - 1) % 3
     # If this fails, something is truly wrong; so no try-catch
     db.execute(
         "UPDATE invitee SET attending = ? WHERE name = ?",
