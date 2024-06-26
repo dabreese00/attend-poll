@@ -2,13 +2,8 @@
 
 Features:
 
-- counts button clicks
-- allows you to reset the counter via command line
-
-How to use:
-
-- Click the button if you're attending.
-- Read the count of people attending.
+- Sign your name & RSVP
+- See who is attending
 
 How to develop:
 
@@ -22,8 +17,14 @@ How to develop:
 
 How to deploy:
 
-- Clone the repo
-- Push to Dokku
-- Configure the DATABASE environment variable to "/app/storage/attend-poll.sqlite"
-- In Dokku run `flask --app attend-poll init-db`
-- Restart app
+Push to Dokku: `git push dokku main`
+
+Requires:
+- Dokku persistent storage directory created and mounted
+- Dokku app configured with DATABASE variable pointing to persistent storage mount location
+
+Reset the production database:
+
+```
+ssh dokku@dokku-host 'dokku run attend-poll "flask --app attend-poll init-db"'
+```
