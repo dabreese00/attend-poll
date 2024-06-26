@@ -7,18 +7,31 @@
   </head>
   <body>
 
-    <form action="/attending" method="POST">
-      If you'll be there, type your name and click the button!
+    <form action="/invite" method="POST">
+      Enter the name of someone to invite:
       <input type="text" name="name" value="Mickey" />
-      <button type="submit">I'm in!</button>
+      <button type="submit">Invite</button>
     </form>
 
     <p>Currently attending: {{ count }}</p>
 
     <ul id="invitees">
       {% for invitee in invitees %}
-      <li>Name: {{ invitee.name }}, Attending? {{ invitee.attending }}</li>
+      <li>
+        {{ invitee.name }} {{ invitee.attending }}
+        <form action="/rsvp" method="POST">
+          {% if invitee.attending %}
+            <button name="{{ invitee.name }}" type="submit">Change</button>
+          {% else %}
+            <button name="{{ invitee.name }}" type="submit">Change</button>
+          {% endif %}
+        </form>
+      </li>
       {% endfor %}
     </ul>
+
+    <form action="/archive" method="POST">
+      <button type="submit">Clear invitee list</button>
+    </form>
   </body>
 </html>

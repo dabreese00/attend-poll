@@ -1,7 +1,13 @@
 DROP TABLE IF EXISTS invitee;
+DROP TABLE IF EXISTS past_invitee;
 
 CREATE TABLE invitee (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT UNIQUE NOT NULL,
-  attending BOOLEAN NOT NULL CHECK (attending IN (0, 1))
-)
+  attending BOOLEAN CHECK (attending IN (0, 1))
+);
+
+CREATE TABLE past_invitee (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL
+);
