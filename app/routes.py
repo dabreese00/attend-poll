@@ -71,19 +71,21 @@ def update_rsvp(name):
 def archive_invitees():
     db = get_db()
     res = db.execute("SELECT name, attending FROM invitee")
-    (invitee_names, _) = zip(*list(res.fetchall()))
-    for name in invitee_names:
-        try:
-            db.execute(
-                "INSERT INTO past_invitee (name) VALUES (?)",
-                (name,)
-            )
-            db.commit()
-        except db.IntegrityError:
-            message = f"Invitee {name} already in past invitees."
-            app.logger.debug(message)
-    db.execute("DELETE FROM invitee")
-    db.commit()
+    invitees = list(res.fetchall())
+    if len(invitees) > 0:
+        (invitee_names, _) = zip(*invitees)
+        for name in invitee_names:
+            try:
+                db.execute(
+                    "INSERT INTO past_invitee (name) VALUES (?)",
+                    (name,)
+                )
+                db.commit()
+            except db.IntegrityError:
+                message = f"Invitee {name} already in past invitees."
+                app.logger.debug(message)
+        db.execute("DELETE FROM invitee")
+        db.commit()
 
 
 @app.route("/", methods=["GET"])
