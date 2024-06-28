@@ -1,0 +1,32 @@
+button,
+input,
+body {
+  font-size: 1.1em;
+}
+
+body {
+  color: white;
+  background-color: rgb(31, 39, 54);
+  font-family: sans-serif;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 30px 10px;
+}
+
+.summary {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.invitees {
+  margin: 10px 10px;
+  padding: 10px 10px;
+}
+
+.invitee {
+  margin: 10px 0px;
+}
+
+.btn-warn {
+  color: #A22;
+}

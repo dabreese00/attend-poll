@@ -2,22 +2,30 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
     <title>Attendance Poll</title>
     <link rel="shortcut icon" href={{ url_for('static', filename='favicon.png') }} />
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} />
   </head>
   <body>
 
-    <form action="/invite" method="POST">
-      Enter the name of someone to invite:
-      <input type="text" name="name" value="Mickey" />
-      <button type="submit">Invite</button>
-    </form>
+    <div>
+      <div>
+        Enter the name of someone to invite:
+      </div>
+      <div>
+        <form action="/invite" method="POST">
+          <input type="text" name="name" value="Mickey" />
+          <button type="submit">Invite</button>
+        </form>
+      </div>
+    </div>
 
-    <p>Currently attending: {{ count }}</p>
+    <div class="summary">Currently attending: {{ count }}</div>
 
-    <ul id="invitees">
+    <div class="invitees">
       {% for invitee in invitees %}
-      <li>
+      <div class="invitee">
         {{ invitee.name }} {{ invitee.attending }}
         <form action="/rsvp" method="POST">
           {% if invitee.attending %}
@@ -26,12 +34,12 @@
             <button name="{{ invitee.name }}" type="submit">Change</button>
           {% endif %}
         </form>
-      </li>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
 
     <form action="/archive" method="POST">
-      <button type="submit">Clear invitee list</button>
+      <button type="submit" class="btn-warn">Clear invitee list</button>
     </form>
   </body>
 </html>
